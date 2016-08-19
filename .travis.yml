@@ -1,0 +1,19 @@
+language: node_js
+
+node_js:
+  - "6"
+  - "5"
+  - "4"
+
+notifications:
+  # disable email notification
+  email: false
+
+cache:
+  directories:
+    # cache node modules
+    - node_modules
+
+before_script:
+  # remove unused node modules from cache
+  - npm prune
