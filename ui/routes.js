@@ -7,17 +7,17 @@ export default function routes ($stateProvider, $locationProvider, $urlRouterPro
 
     $stateProvider
         .state ('feed', {
-            url: 'feed/:type',
+            url: '/feed/:type',
             template: '<feed></feed>'
         })
 
         .state ('submit', {
-            url: 'submit',
+            url: '/submit',
             template: '<new-entry></new-entry>'
         })
 
         .state ('repo', {
-            url: ':org/:repoName',
+            url: '/:org/:repoName',
             template: '<comments-page></comments-page>'
         });
 

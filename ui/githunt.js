@@ -9,13 +9,13 @@ const template  = `
   `;
 
 
-export const GitHunt = {
+const GitHunt = {
     template,
     controller: class gitHunt {
         constructor(){
 
         }
     }
-
 };
 
+export default GitHunt;

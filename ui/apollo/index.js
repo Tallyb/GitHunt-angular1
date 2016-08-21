@@ -31,6 +31,11 @@ function ApolloProvider() {
             return this._wrapper(_client.mutate(options));
         },
 
+        watchQuery(options) {
+            this._check();
+            return _client.watchQuery(options);
+        },
+
         _check() {
             if (!_client) {
                 throw new Error('Missing client');
