@@ -16,7 +16,7 @@ const template = `
       </a>
     </span>
     <p ng-if="!$ctrl.data.loading && !$ctrl.data.currentUser" class="navbar-text navbar-right">
-      <a ng-click="$ctrl.login()">Log in with GitHub</a>
+      <a href="/login/github">Log in with GitHub</a>
     </p>
   `;
 

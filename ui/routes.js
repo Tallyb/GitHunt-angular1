@@ -3,7 +3,7 @@ export default function routes ($stateProvider, $locationProvider, $urlRouterPro
     "use strict";
     'ngInject';
 
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
 
     $stateProvider
         .state ('feed', {
