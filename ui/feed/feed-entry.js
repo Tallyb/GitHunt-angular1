@@ -13,7 +13,7 @@ const template = `
           <img
             class="media-object"
             style="width: 64px; height: 64px"
-            ng-src="$ctrl.entry.repository.owner.avatar_url"
+            ng-src="{{$ctrl.entry.repository.owner.avatar_url}}"
           />
         </a>
       </div>

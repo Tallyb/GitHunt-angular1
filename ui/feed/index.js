@@ -1,13 +1,15 @@
 import angular from 'angular';
 
-import Feed from './feed';
-import feedService from './feed.service';
-import feedEntry  from './feed-entry';
+import Feed from    './feed';
+import FeedService  from './feed.service';
+import FeedEntry    from './feed-entry';
+import VoteButtons  from './vote-buttons';
 
 let module = angular.module ('feed', [ ])
-        .service    ('feedService', feedService)
+        .service    ('feedService', FeedService)
         .component  ('feed', Feed)
-        .component  ('feedEntry', feedEntry)
+        .component  ('feedEntry', FeedEntry)
+        .component  ('voteButtons', VoteButtons)
     ;
 
 export default module.name;

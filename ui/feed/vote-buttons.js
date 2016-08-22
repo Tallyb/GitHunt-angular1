@@ -16,3 +16,18 @@ const template = `
       &nbsp;
     </span>
 `;
+
+class controller {
+
+}
+
+
+const VoteButtons = {
+    template,
+    controller,
+    bindings: {
+
+    }
+};
+
+export default VoteButtons;

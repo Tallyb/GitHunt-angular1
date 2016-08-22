@@ -33,6 +33,8 @@ module.exports = function makeWebpackConfig () {
     app: './ui/index.js'
   };
 
+  config.debug = true;
+
   /**
    * Output
    * Reference: http://webpack.github.io/docs/configuration.html#output

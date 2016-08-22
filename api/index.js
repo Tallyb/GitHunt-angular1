@@ -7,6 +7,7 @@ import { Strategy as GitHubStrategy } from 'passport-github';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import knex from './sql/connector';
+import cors from 'cors';
 
 const KnexSessionStore = require('connect-session-knex')(session);
 const store = new KnexSessionStore({
@@ -30,7 +31,7 @@ const {
     GITHUB_CLIENT_SECRET,
 } = process.env;
 
-const app = express();
+const app = express().use('*', cors());
 
 app.use(session({
     secret: 'your secret',
@@ -51,7 +52,7 @@ app.get('/login/github',
     passport.authenticate('github'));
 
 app.get('/login/github/callback',
-    passport.authenticate('github', { failureRedirect: '/' }),
+    passport.authenticate('github', { failureRedirect: '/loginError' }),
     (req, res) => res.redirect('/'));
 
 app.get('/logout', (req, res) => {

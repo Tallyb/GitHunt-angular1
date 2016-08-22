@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-class feedService {
+class FeedService {
     apollo = undefined;
 
     constructor (apollo) {
@@ -88,6 +88,6 @@ class feedService {
     }
 }
 
-feedService.$inject = ['apollo'];
+FeedService.$inject = ['apollo'];
 
-export  default  feedService;
+export default FeedService;
