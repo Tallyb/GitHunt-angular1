@@ -13,6 +13,7 @@ import Profile      from './profile';
 import AppService   from './app.Service';
 
 import routes from './routes';
+import routerTrace from './router.trace';
 
 let app = angular.module ('app', [
     uiRouter,
@@ -31,6 +32,7 @@ let app = angular.module ('app', [
             });
         }])
         .config     (routes)
+        .run (routerTrace)
         .service    ("AppService", AppService)
         .constant   ("moment",  moment)
         .component  ('gitHunt', GitHunt )

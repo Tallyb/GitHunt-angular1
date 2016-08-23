@@ -204,7 +204,7 @@ module.exports = function makeWebpackConfig () {
    */
   config.devServer = {
     contentBase: './src/public',
-    stats: 'minimal',
+    //stats: 'minimal',
     proxy: {
       '/graphql': 'http://localhost:3010/graphql',
       '/login/*': 'http://localhost:3010',

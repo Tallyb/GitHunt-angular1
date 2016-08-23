@@ -10,14 +10,14 @@ const template = `
         <li ui-sref-active=="active">
           <a
             title="Top"
-            href="/feed/top">
+            ui-sref="feed({type:'top'})">
             Top
           </a>
         </li>
         <li ui-sref-active="active">
           <a
             title="New"
-            href="/feed/new">
+            ui-sref="feed({type:'new'})">
             New
           </a>
         </li>

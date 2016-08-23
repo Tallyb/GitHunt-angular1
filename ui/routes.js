@@ -3,7 +3,7 @@ export default function routes ($stateProvider, $locationProvider, $urlRouterPro
     "use strict";
     'ngInject';
 
-    //$locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode (true);
 
     $stateProvider
         .state ('feed', {
@@ -24,11 +24,13 @@ export default function routes ($stateProvider, $locationProvider, $urlRouterPro
             url: 'loginError',
             template: '<div> Error in login </div>'
         })
-
-
     ;
 
+    $urlRouterProvider.when('',($state) => {
+        /*ngInject*/
+        $state.go ('feed', {type: 'top'});
+    });
 
 
-    $urlRouterProvider.when('/','/feed/top');
+
 }
