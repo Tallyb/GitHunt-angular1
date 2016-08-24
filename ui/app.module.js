@@ -11,6 +11,7 @@ import Loading      from './loading';
 import feed         from './feed';
 import Profile      from './profile';
 import AppService   from './app.Service';
+import NewEntry     from './new.entry';
 
 import routes from './routes';
 import routerTrace from './router.trace';
@@ -39,6 +40,7 @@ let app = angular.module ('app', [
         .component  ('navigation', Navigation)
         .component  ('loading', Loading)
         .component  ('profile', Profile)
+        .component  ('newEntry', NewEntry)
 ;
 
 

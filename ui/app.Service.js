@@ -5,34 +5,45 @@ class AppService {
     apollo = undefined;
     $http = undefined;
 
-    constructor (apollo, $http) {
+    constructor (apollo) {
         this.apollo = apollo;
-        this.$http = $http;
     }
 
-    CurrentUserForProfile =  gql`
-      query CurrentUserForProfile {
-        currentUser {
-          login
-          avatar_url
-        }
-      }
-    `;
 
     getCurrentUserProfile (){
+        const query =  gql`
+          query CurrentUserForProfile {
+            currentUser {
+              login
+              avatar_url
+            }
+          }
+        `;
+
         return this.apollo.query({
-            query: this.CurrentUserForProfile,
+            query,
         });
     }
 
-    githubLogin () {
-        return this.$http.jsonp('/login/github',).then ((res) => {
-            console.log ('login');
-            return res;
-        } )
-    }
+    submitRepository (repoFullName){
 
+        const mutation = gql `
+            mutation submitRepository($repoFullName: String!) {
+                submitRepository(repoFullName: $repoFullName) {
+                    createdAt
+                }
+            }
+        `;
+
+        return this.apollo.mutate ({
+            mutation,
+            variables: {
+                repoFullName
+            }
+        });
+    }
 }
 
-AppService.$inject = ['apollo', '$http'];
+AppService.$inject = ['apollo'];
+
 export default  AppService;
