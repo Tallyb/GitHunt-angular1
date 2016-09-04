@@ -1,4 +1,4 @@
-import AppService from './app.Service';
+import AppService from './app.service';
 
 const template = `
      <div>
