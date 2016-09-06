@@ -30,7 +30,7 @@ module.exports = function makeWebpackConfig () {
    * Karma will set this when it's a test build
    */
   config.entry = isTest ? {} : {
-    app: './ui/index.js'
+    app: './src/index.js'
   };
 
   config.debug = true;
@@ -47,7 +47,7 @@ module.exports = function makeWebpackConfig () {
 
     // Output path from the view of the page
     // Uses webpack-dev-server in development
-    publicPath: isProd ? '/' : 'http://localhost:3000/',
+    publicPath: isProd ? '/' : 'http://localhost:3050/',
 
     // Filename for entry points
     // Only adds hash in build mode
@@ -163,7 +163,7 @@ module.exports = function makeWebpackConfig () {
     // Render index.html
     config.plugins.push(
         new HtmlWebpackPlugin({
-          template: './ui/index.html',
+          template: './src/index.html',
           inject: 'body'
         }),
 
@@ -192,7 +192,7 @@ module.exports = function makeWebpackConfig () {
         // Copy assets from the public folder
         // Reference: https://github.com/kevlened/copy-webpack-plugin
         new CopyWebpackPlugin([{
-          from: __dirname + '/ui/public'
+          from: __dirname + '/src/public'
         }])
     )
   }

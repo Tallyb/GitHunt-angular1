@@ -3,7 +3,6 @@ import gql from 'graphql-tag';
 class AppService {
 
     apollo = undefined;
-    $http = undefined;
 
     constructor (apollo) {
         this.apollo = apollo;
@@ -26,7 +25,6 @@ class AppService {
     }
 
     submitRepository (repoFullName){
-
         const mutation = gql `
             mutation submitRepository($repoFullName: String!) {
                 submitRepository(repoFullName: $repoFullName) {
@@ -42,6 +40,8 @@ class AppService {
             }
         });
     }
+
+
 }
 
 AppService.$inject = ['apollo'];

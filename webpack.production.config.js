@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   devtool: 'cheap-module-source-map',
-  entry: './ui/index.ts',
+  entry: './src/index.ts',
   output: {
     path: 'api/dist/',
     publicPath: '/',
@@ -29,7 +29,7 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: 'ui/index.html',
+      template: 'src/index.html',
     }),
     new webpack.optimize.CommonsChunkPlugin('common.js'),
     new webpack.optimize.DedupePlugin(),
