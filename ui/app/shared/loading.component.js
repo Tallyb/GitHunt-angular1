@@ -2,11 +2,13 @@ const template = `
  <div>Loading...</div>
   `;
 
+class controller {
+
+}
+
 const Loading = {
     template,
-    controller: class {
-        constructor() {}
-    }
+    controller
 };
 
 export default Loading;

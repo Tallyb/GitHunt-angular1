@@ -1,8 +1,13 @@
-import emojify  from 'node-emoji';
+import emoji  from 'node-emoji';
 
-export function EmojifyFilter  (text) {
-    if (text) {
-        return emojify(text);
+export default function () {
+
+    return function (text) {
+        if (text) {
+            return emoji.emojify(text);
+        }
     }
+
 }
+
 

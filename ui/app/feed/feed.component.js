@@ -40,9 +40,6 @@ class controller {
     }
 
     $onInit () {
-        console.log ('onInit');
-
-
         this.feedService.getFeed (this.type, this.offset, this.itemsPerPage)
             .then((result) => {
                 this.data.feed = result.data.feed;

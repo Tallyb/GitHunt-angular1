@@ -4,8 +4,8 @@ const template = `
         <vote-buttons
           score="$ctrl.entry.score"
           vote="$ctrl.entry.vote"
-          can-vote="!!currentUser"
-          on-vote="onButtonVote($event)">
+          can-vote="!!$ctrl.currentUser"
+          on-vote="$ctrl.onButtonVote($event)">
         </vote-buttons>
       </div>
       <div class="media-left">
@@ -19,7 +19,7 @@ const template = `
       </div>
       <div class="media-body">
         <h4 class="media-heading">
-          <a [href]="$ctrl.entry.repository.html_url">
+          <a href="$ctrl.entry.repository.html_url">
             {{ $ctrl.entry.repository.full_name }}
           </a>
         </h4>
@@ -41,7 +41,7 @@ class controller  {
     org;
     repoName;
 
-    $OnInit() {
+    $onInit() {
         const parts = this.entry.repository.full_name.split('/');
         this.org = parts[0];
         this.repoName = parts[1];
