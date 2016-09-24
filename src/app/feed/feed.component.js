@@ -1,10 +1,56 @@
 import gql from 'graphql-tag';
+import {} from '../../apollo'
+
+const feedQuery = gql`
+  query Feed($type: FeedType!, $offset: Int, $limit: Int) {
+    currentUser {
+      login
+    }
+    feed(type: $type, offset: $offset, limit: $limit) {
+      createdAt
+      score
+      commentCount
+      id
+      postedBy {
+        login
+        html_url
+      }
+      vote {
+        vote_value
+      }
+      repository {
+        name
+        full_name
+        description
+        html_url
+        stargazers_count
+        open_issues_count
+        created_at
+        owner {
+          avatar_url
+        }
+      }
+    }
+  }
+`;
+const voteMutation = gql`
+  mutation vote($repoFullName: String!, $type: VoteType!) {
+    vote(repoFullName: $repoFullName, type: $type) {
+      score
+      id
+      vote {
+        vote_value
+      }
+    }
+  }
+`;
+
 
 const template = `
     <loading ng-if="$ctrl.data.loading"></loading>
-    <div ng-if="!$ctrl.data.loading">
+    <div>
       <feed-entry
-        ng-repeat="entry in $ctrl.data.feed"
+        ng-repeat="entry in $ctrl.data.feed | async:this"
         entry="entry"
         current-user="$ctrl.data.currentUser"
         on-vote="$ctrl.onVote({repo: repo, voteType: voteType})">
@@ -15,24 +61,24 @@ const template = `
 
 class controller {
 
-    apollo = undefined;
+    $scope;
+    apollo;
     data = {
         loading: true
     };
     type = {};
-
     offset = 0;
     itemsPerPage = 10;
 
-    feedService;
-    feedObservable;
+    feedObs;
 
-    constructor (feedService, $state){
+    constructor (apollo, $state, $scope){
         'use strict';
         'ngInject';
 
-        this.feedService = feedService;
+        this.apollo = apollo;
         this.type = $state.params.type;
+        this.$scope = $scope;
     }
 
     onVote(event) {
@@ -40,29 +86,34 @@ class controller {
     }
 
     $onInit () {
-        this.feedService.getFeed (this.type, this.offset, this.itemsPerPage)
-            .then((result) => {
-                this.data.feed = result.data.feed;
-                this.data.loading = false;
-            }, (err) => {
-                console.log (err);
-            }
-        );
+        this.feedObs = this.apollo.watchQuery({
+            query: feedQuery,
+            variables: {
+                type: this.type.toUpperCase(),
+                offset: this.offset,
+                limit: this.itemsPerPage,
+            },
+            forceFetch: true,
+        });
 
-        // this.feedObservable = this.feedService.watchFeed (this.type, this.offset, this.itemsPerPage);
-        // this.feedObservable.subscribe ((res)=>{
-        //     console.dir (res);
-        // });
-
+        this.feedSub = this.feedObs.subscribe(({data, loading}) => {
+            console.log (data, loading);
+            this.data = data;
+            this.currentUser = data.currentUser;
+            this.data.loading = loading;
+            this.$scope.$apply();
+        });
     }
 
     fetchMore() {
-        this.feedObservable.fetchMore({
+        this.feedObs.fetchMore({
             variables: {
                 offset: this.offset + this.itemsPerPage,
             },
             updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult.data) { return prev; }
+                if (!fetchMoreResult.data) {
+                    return prev;
+                }
                 return Object.assign({}, prev, {
                     feed: [...prev.feed, ...fetchMoreResult.data.feed],
                 });

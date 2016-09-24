@@ -19,7 +19,7 @@ const template = `
       </div>
       <div class="media-body">
         <h4 class="media-heading">
-          <a href="$ctrl.entry.repository.html_url">
+          <a ng-href="{{$ctrl.entry.repository.html_url}}">
             {{ $ctrl.entry.repository.full_name }}
           </a>
         </h4>
@@ -61,7 +61,7 @@ const FeedEntry = {
     bindings: {
         entry: '<',
         currentUser: '<',
-        onVote: '@'
+        onVote: '&'
     }
 };
 

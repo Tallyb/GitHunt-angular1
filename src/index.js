@@ -2,6 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import moment from 'moment';
 import 'angular-moment';
+import 'angular1-async-filter';
 
 import apollo from './apollo';
 
@@ -22,7 +23,8 @@ let app = angular.module ('app', [
         'angularMoment',
         apollo,
         feed,
-        shared
+        shared,
+        'asyncFilter'
     ])
         .config(['apolloProvider', (apolloProvider) => {
             apolloProvider.setClient({

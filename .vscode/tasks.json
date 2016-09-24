@@ -1,0 +1,31 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "npm",
+    "isShellCommand": true,
+    "showOutput": "always",
+    "suppressTaskName": true,
+    "tasks": [
+        {
+			"args": ["src", "--out-dir", "lib", "-w", "--source-maps"],
+			"taskName": "watch",
+			"suppressTaskName": true,
+			"isBuildCommand": true, // make this the F1 > Task: Run Build Task gesture
+			"isWatching": true // tell VS Code not wait for this task to finish
+		},
+        
+        {
+            "taskName": "install",
+            "args": ["install"]
+        },
+        {
+            "taskName": "update",
+            "args": ["update"]
+        },
+        {
+            "taskName": "test",
+            "args": ["run", "test"]
+        }
+    ]
+}

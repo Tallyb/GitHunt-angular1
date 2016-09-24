@@ -3,16 +3,15 @@ const template = `
   `;
 
 class controller {
-
 }
 
-const infoLabel = {
+const InfoLabel = {
     template,
     bindings: {
-        label: '<',
+        label: '@',
         value: '<'
     },
     controller,
 };
 
-export default infoLabel;
+export default InfoLabel;

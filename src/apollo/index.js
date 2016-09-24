@@ -1,5 +1,6 @@
 import angular from 'angular';
 import ApolloClient, {createNetworkInterface, addTypename}  from 'apollo-client';
+import { rxify, RxObservableQuery } from 'apollo-client-rxjs';
 
 function ApolloProvider() {
     let _client;
@@ -21,19 +22,17 @@ function ApolloProvider() {
     this.$get = ['$q', ($q) => ({
         query(options) {
             this._check();
-
             return this._wrapper(_client.query(options));
         },
 
         mutate(options) {
             this._check();
-
             return this._wrapper(_client.mutate(options));
         },
 
         watchQuery(options) {
             this._check();
-            return _client.watchQuery(options);
+            return new RxObservableQuery(rxify(_client.watchQuery)(options));
         },
 
         _check() {

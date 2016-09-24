@@ -1,7 +1,7 @@
 {
   "env": {
     "node": true,
-    "mocha": true,
+    "mocha": true
   },
   "extends": "airbnb",
   "parser": "babel-eslint",
@@ -10,6 +10,7 @@
     "ga": true
   },
   "rules": {
-    "camelcase": 0
+    "camelcase": 0,
+    "linebreak-style": 0
   }
 }

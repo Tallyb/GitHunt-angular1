@@ -2,7 +2,10 @@ const template = `
  <loading *ngIf="data.loading"></loading>
   <div *ngIf="!data.loading">
     <div>
-      <h1>Comments for <a [href]="data.entry.repository.html_url">{{data.entry.repository.full_name}}</a></h1>
+      <h1>Comments for 
+        <a [href]="data.entry.repository.html_url">
+        {{data.entry.repository.full_name}}
+        </a></h1>
       <repo-info
         [fullName]="data.entry.repository.full_name"
         [description]="data.entry.repository.description"
@@ -50,52 +53,51 @@ const template = `
   `;
 
 class controller {
+  org;
+  repoName;
+  data;
+  newComment;
+  noCommentContent;
 
-    org;
-    repoName;
-    data;
-    newComment;
-    noCommentContent;
+    // submitComment: (
+    //     repoFullName: string,
+    //     repoId: string,
+    //     commentContent: string,
+    //     currentUser: string
+    // ) => Promise<ApolloQueryResult>;
 
-    submitComment: (
-        repoFullName: string,
-        repoId: string,
-        commentContent: string,
-        currentUser: string
-    ) => Promise<ApolloQueryResult>;
+  constructor() {
+    this.noCommentContent = false;
+  }
 
-    constructor($state) {
-        this.noCommentContent = false;
-    }
-
-    $onInit() {
+  $onInit() {
     this.paramsSub = this.route.params
         .subscribe(params => {
-            this.org = params['org'];
-            this.repoName = params['repoName'];
+          this.org = params.org;
+          this.repoName = params.repoName;
         });
-}
+  }
 
-    submitForm() {
-        this.noCommentContent = false;
+  submitForm() {
+    this.noCommentContent = false;
 
-        const repositoryName = this.data.entry.repository.full_name;
-        const repoId = this.data.entry.id;
-        const currentUser = this.data.currentUser;
+    const repositoryName = this.data.entry.repository.full_name;
+    const repoId = this.data.entry.id;
+    const currentUser = this.data.currentUser;
 
-        if (!this.newComment) {
-            this.noCommentContent = true;
-        } else {
-            this.submitComment(repositoryName, repoId, this.newComment, currentUser).then(() => {
-                this.newComment = '';
-            });
-        }
+    if (!this.newComment) {
+      this.noCommentContent = true;
+    } else {
+      this.submitComment(repositoryName, repoId, this.newComment, currentUser).then(() => {
+        this.newComment = '';
+      });
     }
+  }
 }
 
 const CommentsPage = {
-    template,
-    controller
+  template,
+  controller,
 };
 
 export default CommentsPage;

@@ -3,12 +3,12 @@ const template = `
     <p>
       <info-label
         label="Stars"
-        [value]="stargazersCount">
+        value="$ctrl.stargazersCount">
       </info-label>
       &nbsp;
       <info-label
         label="Issues"
-        [value]="openIssuesCount">
+        value="$ctrl.openIssuesCount">
       </info-label>
       <span ng-if="$ctrl.commentCount || $ctrl.commentCount === 0">
         &nbsp;
@@ -19,7 +19,7 @@ const template = `
       &nbsp;&nbsp;&nbsp;
       Submitted <!--{{ $ctrl.createdAt | amTimeAgo }}-->
       &nbsp;by&nbsp;
-      <a ng-ref="$ctrl.userUrl">{{ $ctrl.username }}</a>
+      <a ng-href="{{$ctrl.userUrl}}">{{ $ctrl.username }}</a>
     </p>
 `;
 
